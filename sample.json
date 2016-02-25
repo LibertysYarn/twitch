@@ -9,5 +9,64 @@
   "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png",
   "_links": {
     "self": "https://api.twitch.tv/kraken/users/freecodecamp"
+}
+
+  "stream": {
+    "_id": 19800682976,
+    "game": "Creative",
+    "viewers": 19,
+    "created_at": "2016-02-24T21:51:07Z",
+    "video_height": 1024,
+    "average_fps": 15,
+    "delay": 0,
+    "is_playlist": false,
+    "_links": {
+      "self": "https://api.twitch.tv/kraken/streams/freecodecamp"
+    },
+    "preview": {
+      "small": "http://static-cdn.jtvnw.net/previews-ttv/live_user_freecodecamp-80x45.jpg",
+      "medium": "http://static-cdn.jtvnw.net/previews-ttv/live_user_freecodecamp-320x180.jpg",
+      "large": "http://static-cdn.jtvnw.net/previews-ttv/live_user_freecodecamp-640x360.jpg",
+      "template": "http://static-cdn.jtvnw.net/previews-ttv/live_user_freecodecamp-{width}x{height}.jpg"
+    },
+    "channel": {
+      "mature": false,
+      "status": "JackeL showing weather JSON  #FCC #Programming #Codepen\n",
+      "broadcaster_language": "en",
+      "display_name": "FreeCodeCamp",
+      "game": "Creative",
+      "language": "en",
+      "_id": 79776140,
+      "name": "freecodecamp",
+      "created_at": "2015-01-14T03:36:47Z",
+      "updated_at": "2016-02-24T22:46:52Z",
+      "delay": null,
+      "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png",
+      "banner": null,
+      "video_banner": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-channel_offline_image-b8e133c78cd51cb0-1920x1080.png",
+      "background": null,
+      "profile_banner": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_banner-6f5e3445ff474aec-480.png",
+      "profile_banner_background_color": null,
+      "partner": false,
+      "url": "http://www.twitch.tv/freecodecamp",
+      "views": 101666,
+      "followers": 5336,
+      "_links": {
+        "self": "http://api.twitch.tv/kraken/channels/freecodecamp",
+        "follows": "http://api.twitch.tv/kraken/channels/freecodecamp/follows",
+        "commercial": "http://api.twitch.tv/kraken/channels/freecodecamp/commercial",
+        "stream_key": "http://api.twitch.tv/kraken/channels/freecodecamp/stream_key",
+        "chat": "http://api.twitch.tv/kraken/chat/freecodecamp",
+        "features": "http://api.twitch.tv/kraken/channels/freecodecamp/features",
+        "subscriptions": "http://api.twitch.tv/kraken/channels/freecodecamp/subscriptions",
+        "editors": "http://api.twitch.tv/kraken/channels/freecodecamp/editors",
+        "teams": "http://api.twitch.tv/kraken/channels/freecodecamp/teams",
+        "videos": "http://api.twitch.tv/kraken/channels/freecodecamp/videos"
+      }
+    }
+  },
+  "_links": {
+    "self": "https://api.twitch.tv/kraken/streams/freecodecamp",
+    "channel": "https://api.twitch.tv/kraken/channels/freecodecamp"
   }
 }
