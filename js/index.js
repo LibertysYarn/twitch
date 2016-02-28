@@ -1,26 +1,27 @@
 var users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx", "RobotCaleb", "thomasballinger", "noobs2ninjas", "beohoff", "NoCopyrightSounds"];
-var names = users.join(',').toLowerCase();
+var usersToString = users.join(',').toLowerCase();
 
 
 for (var i = 0; i < users.length; i++) {
 
-  var urlSt = 'https://api.twitch.tv/kraken/streams?channel=' + names + '&callback=?';
+  var urlSt = 'https://api.twitch.tv/kraken/streams?channel=' + usersToString + '&callback=?';
   var urlUs = 'https://api.twitch.tv/kraken/users/' + users[i] + '?callback=?';
 
-  $.getJSON(urlUs, function(u) {
-    var displayName = u.display_name;
-    var logo = u.logo;
-    var url = u._links.self;
-    var bio = u.bio;
-    console.log(u);
+  $.getJSON(urlUs, function getUserData(userData) {
+    console.assert(users, 'users not given.');
+    var displayName = userData.display_name;
+    var logo = userData.logo;
+    var url = userData._links.self;
+    var bio = userData.bio;
+    console.log(userData);
 
-    $.getJSON(urlSt, function(s) {
-      for (i in s) {
-        if (s.streams !== null) {
-          var game = s.streams[i].channel.game;
-          var gameTitle = (s.streams[i] !== null) ? game : '';
+    $.getJSON(urlSt, function getStreamsData(streamsData) {
+      for (i in streamsData) {
+        if (streamsData.streams !== null) {
+          var game = streamsData.streams[i].channel.game;
+          var gameTitle = (streamsData.streams[i] !== null) ? game : '';
           var status = (data.streams[i] === null) ? "mdl-color--blue-grey-50" : "mdl-color-text--purple";
-          console.log(s);
+          console.log(streamsData);
         }
       }
 
