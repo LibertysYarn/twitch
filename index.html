@@ -7,20 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Twitch Channels</title>
 
-    <link rel="stylesheet" href="css/material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="css/style.css" rel="stylesheet">
-  </head>
+    <!-- <link rel="stylesheet" href="css/material.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
 
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
   <body>
-    <div id="content">
-      <ul id="list">
-        <!-- content goes here-->
-      </ul>
+    <div id="container">
+      <div id="basic" class="section scrollspy">
+        <div class="col s12 m9 l10">
+          <div class="row">
+            <div class="col s6 offset-s3">
+              <ul id="list" class="collection">
+                <!-- content goes here-->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/material.min.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- <script src="js/material.min.js"></script> -->
     <script src="js/index.js"></script>
 
   </script>
