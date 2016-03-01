@@ -1,57 +1,63 @@
-var users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx", "RobotCaleb", "thomasballinger", "noobs2ninjas", "beohoff", "NoCopyrightSounds"];
+var users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx", "RobotCaleb", "thomasballinger", "noobs2ninjas", "beohoff", "NoCopyrightSounds", "imaqtpie", "lirik"];
 var twitch = '';
-var status = "lighten-5";
+var emptyImg = 'https://static-cdn.jtvnw.net/jtv_user_pictures/undefined-profile_image-10dccf22c64c7c47-300x300.jpeg';
 
+//working streams data//
+var urlSt = 'https://api.twitch.tv/kraken/streams?channel=' + users + '&callback=?';
+var userStatusAndGame = [];
 
+$.getJSON(urlSt, function getStreamsData(streamsData) {
+  var data = streamsData.streams;
+  for (var i = 0; i < data.length; i++) {
+    var onlineUsers = {
+      name: data[i].channel.name,
+      game: data[i].game,
+      online: true
+    };
+    userStatusAndGame.push(onlineUsers);
+  }
+  console.log(userStatusAndGame);
+});
+//working streams data//
+
+//working for user data//
 for (var i = 0; i < users.length; i++) {
-  //var urlSt = 'https://api.twitch.tv/kraken/streams?channel=' + users[i] + '&callback=?';
-  var urlUs = 'https://api.twitch.tv/kraken/users/' + userName + '?callback=?';
-  var userName = users[i];
+  var urlUs = 'https://api.twitch.tv/kraken/users/' + users[i] + '?callback=?';
 
   $.getJSON(urlUs, function getUserData(userData) {
     var displayName = userData.display_name;
     var name = userData.name;
     var userLogo = userData.logo;
-    var logo = (userLogo !== null) ? userLogo : ''; 
+    var logo = (userLogo !== null) ? userLogo : emptyImg;
     var url = userData._links.self;
     var userBio = userData.bio;
     var bio = (userBio !== null) ? userBio : '';
     var gameTitle = '';
-    console.assert(users, 'users not given.');
-    console.log(userName, 'user api called');
-    testOnline(userName);
+    var statusColor = arrayLookup(userStatusAndGame, "name", name);
+    //console.log(userStatusAndGame[0].game);
 
-        twitch += '<li id="' + displayName + '" class="collection-item avatar"><img src="' + logo + '" alt="" class="circle">'
-        twitch += '<span class="title">' + displayName + '</span>'
-        twitch += '<p>' + bio + '</p>'
-        twitch += '<p>' + gameTitle + '</p>'
-        twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-' + status + '">grade</i></a>'
-        twitch += '</li>'
+    //filter//
+    function arrayLookup(array, prop, val) {
+      for (var i = 0, len = array.length; i < len; i++) {
+        if (array[i].hasOwnProperty(prop) && array[i][prop] === val) {
+          return "darken-4";
+          //gameTitle = userStatusAndGame[this].game;
+        }
+      }
+      return "lighten-5";
+    }
+    //filter//
 
-        var content = document.getElementById('list'); content.innerHTML = twitch;
+    twitch += '<li id="' + displayName + '" class="collection-item avatar"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
+    twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="title" alt="username ' + displayName + '">' + displayName + '</span></a>'
+      //twitch += '<span class="col s11 bio"><p alt="bio '+displayName+'">' + bio + '</p></span>'
+    twitch += '<p alt="stream title ' + displayName + '">' + gameTitle + '</p>'
+    twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-' + statusColor + '">grade</i></a>'
+    twitch += '</li>'
+
+    var content = document.getElementById('list');
+    content.innerHTML = twitch;
+
   })
 };
-
-function testOnline(userName) {
-  $.getJSON('https://api.twitch.tv/kraken/streams?channel=' + userName + '&callback=?', function getStreamsData(streamsData) {
-    console.log(userName, 'streams api called');
-    for (users in streamsData) {
-      if (streamsData.streams[i] !== null) {
-        var status = 'darken-4'
-        //var gameTitle = streamsData.streams[i].channel.game;
-      } else {
-        console.log('offline');
-      }
-      console.log(userName, 'streams  data touched');
-    }
-  })
-}
-// twitch += '<li id="' + displayName + '" class="mdl-list__item mdl-list__item--three-line">';
-// twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="mdl-list__item-primary-content">';
-// twitch += '<i src="' + logo + '" class="material-icons mdl-list__item-avatar"></i>';
-// twitch += '<span>' + displayName + '</span></a>';
-// twitch += '<span class="mdl-list__item-text-body"><p>' + bio + '</p>';
-// twitch += '<p class="gameTitle">' + gameTitle + '</p></span></span>';
-// twitch += '<span class="mdl-list__item-secondary-content">';
-// twitch += '<a class="mdl-list__item-secondary-action" href="http://www.twitch.tv/' + name + '"></a>';
-// twitch += '<i id="star" class="material-icons ' + status + '">star</i></span></li>';
+//working for user data//
