@@ -2,6 +2,19 @@
   width: 650px;
 }
 
-.bio {
+/*.bio {
   font-size: .85em;
+}*/
+
+.collapsible-body,
+.collapsible-header {
+  border: none;
+  color: #000;
+  background-color: #FFF;
 }
+
+
+.collection .collection-item.active {
+    background-color: #FFF;
+    color: #26a69a;
+  }
