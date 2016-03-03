@@ -25,19 +25,25 @@
               <div class="row">
                 <div class="col s12">
                   <ul class="tabs">
-                    <li class="tab col s4">
-                      <a href="#search">Search</a>
+                    <li id="listAll" class="tab col s3">
+                      <a class="active" href="#toc">All</a>
                     </li>
-                    <li class="tab col s4">
-                      <a class="active" href="#online">Online</a>
+                    <li id="onlineTab" class="tab col s3">
+                      <a href="#online">Online</a>
                     </li>
-                    <li class="tab col s4">
+                    <li id="offlineTab" class="tab col s3">
                       <a href="#offline">Offline</a>
                     </li>
+                    <li id="searchTab" class="tab col s3 collapsible-header">
+                      <a href="#search">Search</a>
+                    </li>
+
+
                   </ul>
                 </div>
 
                 <ul id="list" class="collection collapsible" data-collapsible="accordion">
+                
                   <!-- content goes here-->
                 </ul>
               </div>

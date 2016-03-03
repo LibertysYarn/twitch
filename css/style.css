@@ -18,3 +18,7 @@
     background-color: #FFF;
     color: #26a69a;
   }
+
+  .tabs {
+    overflow-x: hidden;
+  }

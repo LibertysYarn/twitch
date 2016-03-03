@@ -1,4 +1,4 @@
-var users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx", "RobotCaleb", "thomasballinger", "noobs2ninjas", "beohoff", "NoCopyrightSounds", "imaqtpie", "lirik"];
+users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx", "RobotCaleb", "thomasballinger", "noobs2ninjas", "beohoff", "NoCopyrightSounds", "imaqtpie", "lirik"];
 var twitch = '';
 var emptyImg = 'https://static-cdn.jtvnw.net/jtv_user_pictures/undefined-profile_image-10dccf22c64c7c47-300x300.jpeg';
 
@@ -56,11 +56,11 @@ for (var i = 0; i < users.length; i++) {
     }
     //filter//
 
-    twitch += '<li id="' + displayName + '" class="collection-item avatar ' + status +'"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
+    twitch += '<li id="' + displayName + '" class="collection-item avatar ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
     twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="title" alt="username ' + displayName + '">' + displayName + '</span></a>'
     twitch += '<p alt="stream title ' + displayName + '">' + gameTitle + '</p>'
     twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-' + statusColor + '">grade</i></a></span>'
-    twitch += '<span class="collapsible-body"><span class="col s11 bio"><p alt="bio '+displayName+'">' + bio + '</p></span></span>'
+    twitch += '<span class="collapsible-body"><span class="col s11 bio"><p alt="bio ' + displayName + '">' + bio + '</p></span></span>'
     twitch += '</li>'
 
     var content = document.getElementById('list');
@@ -68,15 +68,29 @@ for (var i = 0; i < users.length; i++) {
 
   })
 };
-//working for user data//
 
 
-    $('ul.tabs').tabs('select_tab', 'offline');
-    var offline = document.getElementByClassName('offline');
+$('#searchTab').click(function() {
+  $('#list').prepend('<form><div class="input-field"><input id="search" type="search" required><label for="search"><i class="material-icons">search</i></label><i class="material-icons">close</i></div></form>');
+});
 
 
+$('#onlineTab').click(function() {
+  $('.offline').hide();
+  $('.online').show();
+});
 
-     $('.collapsible').collapsible({
-       accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-     });
-  
+$('#offlineTab').click(function() {
+  $('.online').hide();
+  $('.offline').show();
+});
+
+$('#listAll').click(function() {
+  $('.offline').show();
+  $('.online').show();
+  $('.searchLI').hide();
+});
+
+$('.collapsible').collapsible({
+  accordion: false
+});
