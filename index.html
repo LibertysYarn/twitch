@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Twitch Channels</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twitch Channels</title>
 
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="css/style.css" rel="stylesheet">
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/style.css" rel="stylesheet">
 
-  </head>
-  <body>
-    <div id="container">
-      <div id="basic" class="section scrollspy">
-        <div class="col s12 m9 l10">
-          <div class="row">
-            <div class="col s6 offset-s3">
-              <div class="row">
-                <div class="col s12">
-                  <ul class="tabs">
-                    <li id="listAll" class="tab col s3">
-                      <a class="active" href="#toc">All</a>
-                    </li>
-                    <li id="onlineTab" class="tab col s3">
-                      <a href="#online">Online</a>
-                    </li>
-                    <li id="offlineTab" class="tab col s3">
-                      <a href="#offline">Offline</a>
-                    </li>
-                    <li id="searchTab" class="tab col s3 collapsible-header">
-                      <a href="#search">Search</a>
-                    </li>
+</head>
 
-
-                  </ul>
-                </div>
-
-                <ul id="list" class="collection collapsible" data-collapsible="accordion">
-                
-                  <!-- content goes here-->
+<body>
+  <div id="container">
+    <div id="basic" class="section scrollspy">
+      <div class="col s12 m9 l10">
+        <div class="row">
+          <div class="col s6 offset-s3">
+            <div class="row">
+              <div class="col s12">
+                <ul class="tabs">
+                  <li id="listAll" class="tab col s3">
+                    <a class="active" name="all" href="#toc">All</a>
+                  </li>
+                  <li id="onlineTab" class="tab col s3">
+                    <a href="#online" name="online">Online</a>
+                  </li>
+                  <li id="offlineTab" class="tab col s3">
+                    <a href="#offline" name="offline">Offline</a>
+                  </li>
+                  <li id="searchTab" class="tab col s3 collapsible-header">
+                    <a href="#search" name="search">Search</a>
+                  </li>
                 </ul>
               </div>
+              <ul class="collection">
+                <form class="searchLI">
+                  <div class="input-field">
+                    <input type="search" required>
+                    <label for="search"><i class="material-icons">search</i></label><i id="close" class="material-icons">close</i></div>
+                </form><span id="list" class="collapsible" data-collapsible="accordion">
+                <!-- content goes here-->
+              </span></ul>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-      <script src="js/index.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="js/index.js"></script>
 
     </script>
-  </body>
+</body>
+
 </html>

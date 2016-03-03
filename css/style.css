@@ -6,19 +6,34 @@
   font-size: .85em;
 }*/
 
-.collapsible-body,
-.collapsible-header {
+.collapsible-body, .collapsible-header {
   border: none;
   color: #000;
   background-color: #FFF;
 }
-
-
+.collapsible-body p {
+  margin: 0;
+  padding: 1rem;
+}
 .collection .collection-item.active {
-    background-color: #FFF;
-    color: #26a69a;
-  }
+  background-color: #FFF;
+  color: #26a69a;
+}
+.tabs {
+  overflow-x: hidden;
+}
+.input-field label.active {
+  font-size: 0.8rem;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+}
 
-  .tabs {
-    overflow-x: hidden;
-  }
+#search{
+  display: block;
+}
+.searchLI {
+  display:none;
+}

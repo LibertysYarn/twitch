@@ -31,7 +31,7 @@ for (var i = 0; i < users.length; i++) {
     var logo = (userLogo !== null) ? userLogo : emptyImg;
     var url = userData._links.self;
     var userBio = userData.bio;
-    var bio = (userBio !== null) ? userBio : '';
+    var bio = (userBio !== null) ? 'Bio: '+ userBio : 'No bio. So sad.';
     var gameTitle = arrayGameLookup(userStatusAndGame, "game", "name", name);
     var statusColor = arrayNameLookup(userStatusAndGame, "name", name);
     var status = (gameTitle !== "") ? "online" : "offline";
@@ -70,24 +70,19 @@ for (var i = 0; i < users.length; i++) {
 };
 
 
-$('#searchTab').click(function() {
-  $('#list').prepend('<form><div class="input-field"><input id="search" type="search" required><label for="search"><i class="material-icons">search</i></label><i class="material-icons">close</i></div></form>');
+$('.tab').click(function() {
+  var value = $(this).attr("id");
+  console.log(value);
+if (value == "listAll") {
+    $('.collection-item').show();
+    $('.searchLI').hide();
+  } else if (value == "searchTab") {
+  $('.searchLI').slideToggle();
+}   else (value == "onlineTab") ? $('.online').show() && $('.offline').hide() : $('.offline').show() && $('.online').hide();
 });
 
 
-$('#onlineTab').click(function() {
-  $('.offline').hide();
-  $('.online').show();
-});
-
-$('#offlineTab').click(function() {
-  $('.online').hide();
-  $('.offline').show();
-});
-
-$('#listAll').click(function() {
-  $('.offline').show();
-  $('.online').show();
+$('#close').click(function() {
   $('.searchLI').hide();
 });
 
