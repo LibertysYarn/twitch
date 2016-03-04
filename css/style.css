@@ -2,6 +2,10 @@
   width: 650px;
 }
 
+p {
+  color: #444;
+}
+
 .collapsible-body, .collapsible-header {
   border: none;
   color: #000;
@@ -35,4 +39,7 @@ border-bottom: 1px solid #e0e0e0;
 ul {
     padding: 0 10px;
     background-color: #f0f0f0;
+}
+.chip {
+  margin-bottom: 10px;
 }

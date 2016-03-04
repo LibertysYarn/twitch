@@ -2,21 +2,12 @@ users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx", "RobotCaleb", "
 var twitch = '';
 var emptyImg = 'https://static-cdn.jtvnw.net/jtv_user_pictures/undefined-profile_image-10dccf22c64c7c47-300x300.jpeg';
 
+
 //filter//
-function arrayNameLookup(array, prop, val) {
-  for (var i = 0, len = array.length; i < len; i++) {
-    if (array[i].hasOwnProperty(prop) && array[i][prop] === val) {
-      return "darken-4";
-    }
-  }
-  return "lighten-5";
-}
-
-
-function arrayPreviewLookup(array, prop, prop2, val) {
+function arrayLookup(array, prop, prop2, val) {
   for (var i = 0, len = array.length; i < len; i++) {
     if (array[i].hasOwnProperty(prop) && array[i][prop2] === val) {
-      return userStatusAndGame[i][prop];
+      return array[i][prop];
     }
   }
   return "";
@@ -32,55 +23,79 @@ $.getJSON(urlSt, function getStreamsData(streamsData) {
   for (var i = 0; i < data.length; i++) {
     var onlineUsers = {
       name: data[i].channel.name,
-      game: data[i].game,
+      game: data[i].channel.status,
       preview: data[i].preview.medium,
-      followers: data[i].channel.followers,
-      views: data[i].channel.views,
-      online: true
+      online: "darken-4"
     };
     userStatusAndGame.push(onlineUsers);
   }
 });
 //working streams data//
 
+//search channels info//
+var searchChannelData = [];
 
-//working for user data//
+for (var i = 0; i < users.length; i++) {
+  var urlSr = 'https://api.twitch.tv/kraken/search/channels?q=' + users[i]+ '&callback=?';
+$.getJSON(urlSr, function getUserData(searchData) {
+      //console.log(searchData);
+      var channelSearch = {
+        name: searchData.channels[0].name,
+        total: searchData._total,
+        followers: searchData.channels[0].followers,
+        views: searchData.channels[0].views
+      };
+      searchChannelData.push(channelSearch);
+    })
+    //console.log(searchChannelData);
+  }
+//search channels info//
+
+
+
+
+//working for users data//
 for (var i = 0; i < users.length; i++) {
   var urlUs = 'https://api.twitch.tv/kraken/users/' + users[i] + '?callback=?';
   $.getJSON(urlUs, function getUserData(userData) {
 
-    var displayName = userData.display_name;
-    var name = userData.name;
-    var userLogo = userData.logo;
-    var logo = (userLogo !== null) ? userLogo : emptyImg;
-    var url = userData._links.self;
-    var updated = userData.updated_at;
-    var userBio = userData.bio;
-    var bio = (userBio !== null) ? 'Bio: ' + userBio : '  No bio.     So sad.  ';
-    var gameTitle = arrayPreviewLookup(userStatusAndGame, "game", "name", name);
-    var previewImg = arrayPreviewLookup(userStatusAndGame, "preview", "name", name);
-    var userViews = arrayPreviewLookup(userStatusAndGame, "views", "name", name);
-    var userFollowers = arrayPreviewLookup(userStatusAndGame, "followers", "name", name);
-    var statusColor = arrayNameLookup(userStatusAndGame, "name", name);
-    var status = (gameTitle !== "") ? "online" : "offline";
-    var folNum = (userFollowers == '') ? 'hide' : userFollowers;
-    var viewNum = (userViews == '') ? 'hide' : userViews;
-    //console.log(userData);
+      var displayName = userData.display_name;
+      var name = userData.name;
+      var userLogo = userData.logo;
+      var url = userData._links.self;
+      var userBio = userData.bio;
+
+      var logo = (userLogo !== null) ? userLogo : emptyImg;
+      var updated = jQuery.timeago(new Date(userData.updated_at));
+      var bio = (userBio !== null) ? 'Bio: ' + userBio : '  No bio.     So sad.  ';
+      var gameTitle = arrayLookup(userStatusAndGame, "game", "name", name);
+      var previewImg = arrayLookup(userStatusAndGame, "preview", "name", name);
+      var userViews = arrayLookup(searchChannelData, "views", "name", name);
+      var userFollowers = arrayLookup(searchChannelData, "followers", "name", name);
+      var statusColor = arrayLookup(userStatusAndGame, "online", "name", name);
+      var total = arrayLookup(searchChannelData, "total", "name", name);
+      var status = (gameTitle !== "") ? "online" : "offline";
+      var folNum = (userFollowers == '') ? 'hide' : userFollowers;
+      var viewNum = (userViews == '') ? 'hide' : userViews;
+      var totalNum = (total == '') ? 'hide' : total;
+      //working for users data//
 
 
+      //content//
+      twitch += '<li id="' + displayName + '" class="collection-item avatar ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
+      twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="title" alt="username ' + displayName + '">' + displayName + '</span></a>'
+      twitch += '<p alt="stream title ' + displayName + '">' + gameTitle + '</p>'
+      twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-lighten-5 text-' + statusColor + '">grade</i></a></span>'
+      twitch += '<span class="collapsible-body">'
+      twitch += '<span class="col s12 bio"><img class="center-block" src="' + previewImg + '">'
+      twitch += '<p alt="bio ' + displayName + '">' + bio + '<br>'
+      twitch += '<div class="center"><span class="chip ' + updated + '">updated ' + updated + '</span>   <span class="chip ' + totalNum + '">' + totalNum + ' videos</span>  <span class="chip ' + viewNum + '">' + userViews + ' views</span>  <span class="chip ' + folNum + '">' + userFollowers + ' followers</span></div></p></span></span>'
+      twitch += '</li>'
 
-    twitch += '<li id="' + displayName + '" class="collection-item avatar ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
-    twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="title" alt="username ' + displayName + '">' + displayName + '</span></a>'
-    twitch += '<p alt="stream title ' + displayName + '">' + gameTitle + '</p>'
-    twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-' + statusColor + '">grade</i></a></span>'
-    twitch += '<span class="collapsible-body">'
-    twitch += '<span class="col s12 bio"><img class="center-block" src="' + previewImg + '"><p alt="bio ' + displayName + '">' + bio + '<br><div class="center"><span class="chip ' +viewNum+'">' + userViews + ' views</span>  <span class="chip ' +folNum+'">' + userFollowers + ' followers</span></div></p></span></span>'
-    twitch += '</li>'
-
-    var content = document.getElementById('list');
-    content.innerHTML = twitch;
-  })
-
+      var content = document.getElementById('list');
+      content.innerHTML = twitch;
+    })
+    //content//
 }
 
 
@@ -105,3 +120,5 @@ $('#close').click(function() {
 $('.collapsible').collapsible({
   accordion: false
 });
+
+jQuery("time.timeago").timeago();
