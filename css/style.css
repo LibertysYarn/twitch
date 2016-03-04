@@ -43,3 +43,12 @@ ul {
 .chip {
   margin-bottom: 10px;
 }
+
+.hiding {
+  margin-left:-100%;
+  opacity:0.5;
+}
+
+.hidden {
+  display:none;
+}

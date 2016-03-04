@@ -36,8 +36,8 @@ $.getJSON(urlSt, function getStreamsData(streamsData) {
 var searchChannelData = [];
 
 for (var i = 0; i < users.length; i++) {
-  var urlSr = 'https://api.twitch.tv/kraken/search/channels?q=' + users[i]+ '&callback=?';
-$.getJSON(urlSr, function getUserData(searchData) {
+  var urlSr = 'https://api.twitch.tv/kraken/search/channels?q=' + users[i] + '&callback=?';
+  $.getJSON(urlSr, function getUserData(searchData) {
       //console.log(searchData);
       var channelSearch = {
         name: searchData.channels[0].name,
@@ -48,7 +48,7 @@ $.getJSON(urlSr, function getUserData(searchData) {
       searchChannelData.push(channelSearch);
     })
     //console.log(searchChannelData);
-  }
+}
 //search channels info//
 
 
@@ -67,7 +67,7 @@ for (var i = 0; i < users.length; i++) {
 
       var logo = (userLogo !== null) ? userLogo : emptyImg;
       var updated = jQuery.timeago(new Date(userData.updated_at));
-      var bio = (userBio !== null) ? 'Bio: ' + userBio : '  No bio.     So sad.  ';
+      var bio = (userBio !== null) ? 'Bio: ' + userBio : ' ';
       var gameTitle = arrayLookup(userStatusAndGame, "game", "name", name);
       var previewImg = arrayLookup(userStatusAndGame, "preview", "name", name);
       var userViews = arrayLookup(searchChannelData, "views", "name", name);
@@ -82,13 +82,13 @@ for (var i = 0; i < users.length; i++) {
 
 
       //content//
-      twitch += '<li id="' + displayName + '" class="collection-item avatar ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
+      twitch += '<li id="' + displayName + '" alt="' + name + '" class="collection-item avatar in ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
       twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="title" alt="username ' + displayName + '">' + displayName + '</span></a>'
       twitch += '<p alt="stream title ' + displayName + '">' + gameTitle + '</p>'
       twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-lighten-5 text-' + statusColor + '">grade</i></a></span>'
       twitch += '<span class="collapsible-body">'
       twitch += '<span class="col s12 bio"><img class="center-block" src="' + previewImg + '">'
-      twitch += '<p alt="bio ' + displayName + '">' + bio + '<br>'
+      twitch += '<p alt="bio of' + displayName + '">' + bio + '<br>'
       twitch += '<div class="center"><span class="chip ' + updated + '">updated ' + updated + '</span>   <span class="chip ' + totalNum + '">' + totalNum + ' videos</span>  <span class="chip ' + viewNum + '">' + userViews + ' views</span>  <span class="chip ' + folNum + '">' + userFollowers + ' followers</span></div></p></span></span>'
       twitch += '</li>'
 
@@ -99,18 +99,66 @@ for (var i = 0; i < users.length; i++) {
 }
 
 
+$(document).ready(function() {
 
+  $('.tab').click(function() {
+    var value = $(this).attr("id");
+    var $on = $('.online');
+    var $off = $('.offline');
+    var $sLI = $('.searchLI');
+    var hho = 'hidden hiding out';
+    var h = 'hidden';
 
-$('.tab').click(function() {
-  var value = $(this).attr("id");
-  console.log(value);
-  if (value == "listAll") {
-    $('.collection-item').show();
-    $('.searchLI').hide();
-  } else if (value == "searchTab") {
-    $('.searchLI').slideToggle();
-  } else(value == "onlineTab") ? $('.online').show() && $('.offline').hide() : $('.offline').show() && $('.online').hide();
+    console.log(value);
+
+    if (value == "listAll") {
+      $on.removeClass(hho);
+      $off.removeClass(hho);
+      $sLI.hide();
+    } else if (value == "searchTab") {
+      $sLI.slideToggle();
+      $('.collection-item').removeClass(hho);
+    } else if (value == "onlineTab") {
+      $on.removeClass(hho);
+      $off.addClass(h);
+      $sLI.hide();
+    } else if (value == "offlineTab") {
+      $on.addClass(h);
+      $off.removeClass(hho);
+      $sLI.hide();
+    }
+  });
+
+  //search input//
+
+  $("#search-text").keyup(function() {
+    var searchTerm = $("#search-text").val().toLowerCase();
+    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+    $.extend($.expr[':'], {
+      'containsi': function(elem, i, match, array) {
+        return (elem.textContent || elem.innerText || '').toLowerCase()
+          .indexOf((match[3] || "").toLowerCase()) >= 0;
+      }
+    });
+
+    $("#list li").not(":containsi('" + searchSplit + "')").each(function(e) {
+      $(this).addClass('hiding out').removeClass('in');
+      setTimeout(function() {
+        $('.out').addClass('hidden');
+      }, 300);
+    });
+
+    $("#list li:containsi('" + searchSplit + "')").each(function(e) {
+      $(this).removeClass('hidden out').addClass('in');
+      setTimeout(function() {
+        $('.in').removeClass('hiding');
+      }, 1);
+    });
+  });
 });
+
+//search input//
 
 
 $('#close').click(function() {
