@@ -12,6 +12,10 @@ $.getJSON(urlSt, function getStreamsData(streamsData) {
     var onlineUsers = {
       name: data[i].channel.name,
       game: data[i].game,
+      preview: data[i].preview.medium,
+      updates: data[i].channel.updated,
+      followers: data[i].channel.followers,
+      views: data[i].channel.views,
       online: true
     };
     userStatusAndGame.push(onlineUsers);
@@ -31,8 +35,11 @@ for (var i = 0; i < users.length; i++) {
     var logo = (userLogo !== null) ? userLogo : emptyImg;
     var url = userData._links.self;
     var userBio = userData.bio;
-    var bio = (userBio !== null) ? 'Bio: '+ userBio : 'No bio. So sad.';
-    var gameTitle = arrayGameLookup(userStatusAndGame, "game", "name", name);
+    var bio = (userBio !== null) ? 'Bio: ' + userBio : '  No bio.     So sad.  ';
+    var gameTitle = arrayPreviewLookup(userStatusAndGame, "game", "name", name);
+    var previewImg = arrayPreviewLookup(userStatusAndGame, "preview", "name", name);
+    var userViews = arrayPreviewLookup(userStatusAndGame, "views", "name", name);
+    var userFollowers = arrayPreviewLookup(userStatusAndGame, "followers", "name", name);
     var statusColor = arrayNameLookup(userStatusAndGame, "name", name);
     var status = (gameTitle !== "") ? "online" : "offline";
 
@@ -46,21 +53,27 @@ for (var i = 0; i < users.length; i++) {
       return "lighten-5";
     }
 
-    function arrayGameLookup(array, prop, prop2, val) {
+
+    function arrayPreviewLookup(array, prop, prop2, val) {
       for (var i = 0, len = array.length; i < len; i++) {
         if (array[i].hasOwnProperty(prop) && array[i][prop2] === val) {
-          return userStatusAndGame[i].game;
+          return userStatusAndGame[i][prop];
         }
       }
       return "";
     }
+
+
+
+
     //filter//
 
     twitch += '<li id="' + displayName + '" class="collection-item avatar ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
     twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="title" alt="username ' + displayName + '">' + displayName + '</span></a>'
     twitch += '<p alt="stream title ' + displayName + '">' + gameTitle + '</p>'
     twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-' + statusColor + '">grade</i></a></span>'
-    twitch += '<span class="collapsible-body"><span class="col s11 bio"><p alt="bio ' + displayName + '">' + bio + '</p></span></span>'
+    twitch += '<span class="collapsible-body">'
+    twitch += '<span class="col s12 bio"><img class="center-block" src="' + previewImg + '"><p alt="bio ' + displayName + '">' + bio + '<br><div class="center"><span class="chip">' + userViews + ' views</span>  <span class="chip">' + userFollowers + ' followers</span></div></p></span></span>'
     twitch += '</li>'
 
     var content = document.getElementById('list');
@@ -73,12 +86,12 @@ for (var i = 0; i < users.length; i++) {
 $('.tab').click(function() {
   var value = $(this).attr("id");
   console.log(value);
-if (value == "listAll") {
+  if (value == "listAll") {
     $('.collection-item').show();
     $('.searchLI').hide();
   } else if (value == "searchTab") {
-  $('.searchLI').slideToggle();
-}   else (value == "onlineTab") ? $('.online').show() && $('.offline').hide() : $('.offline').show() && $('.online').hide();
+    $('.searchLI').slideToggle();
+  } else(value == "onlineTab") ? $('.online').show() && $('.offline').hide() : $('.offline').show() && $('.online').hide();
 });
 
 

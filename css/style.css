@@ -2,19 +2,12 @@
   width: 650px;
 }
 
-/*.bio {
-  font-size: .85em;
-}*/
-
 .collapsible-body, .collapsible-header {
   border: none;
   color: #000;
   background-color: #FFF;
 }
-.collapsible-body p {
-  margin: 0;
-  padding: 1rem;
-}
+
 .collection .collection-item.active {
   background-color: #FFF;
   color: #26a69a;
@@ -30,10 +23,16 @@
   -o-transform: none;
   transform: none;
 }
-
-#search{
+.input-field input[type=search]:focus {
+border-bottom: 1px solid #e0e0e0;
+}
+#search {
   display: block;
 }
 .searchLI {
-  display:none;
+  display: none;
+}
+ul {
+    padding: 0 10px;
+    background-color: #f0f0f0;
 }
