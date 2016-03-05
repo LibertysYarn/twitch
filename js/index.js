@@ -80,10 +80,11 @@ for (var i = 0; i < users.length; i++) {
 
 
     //content//
-    twitch += '<li id="' + displayName + '" alt="' + name + '" class="collection-item avatar in ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar imaeg" class="circle"></a>'
+    twitch += '<li id="' + displayName + '" alt="' + name + '" class="collection-item avatar in ' + status + '"><span class="collapsible-header"><a href="http://www.twitch.tv/' + name + '"><img src="' + logo + '" alt="avatar image" class="circle"></a>'
     twitch += '<a href="http://www.twitch.tv/' + name + '"><span class="title" alt="username ' + displayName + '">' + displayName + '</span></a>'
     twitch += '<p alt="stream title ' + displayName + '">' + gameTitle + '</p>'
     twitch += '<a href="http://www.twitch.tv/' + name + '" class="secondary-content"><i class="material-icons purple-text text-lighten-5 text-' + statusColor + '">grade</i></a></span>'
+    twitch += '<i id="play" class="material-icons play">play_for_work</i>'
     twitch += '<span class="collapsible-body">'
     twitch += '<span class="col s12 bio"><a href="http://www.twitch.tv/' + name + '"><img class="center-block" src="' + previewImg + '"></a>'
     twitch += '<p alt="bio of' + displayName + '">' + bio + '<br>'

@@ -4,10 +4,13 @@
 p {
   color: #444;
 }
+a {
+  color: #4a148c;
+}
 .collapsible-body, .collapsible-header {
   border: none;
   color: #000;
-  background-color: #FFF;
+  background-color: rgba(0,0,0,0);
 }
 .collection .collection-item.active {
   background-color: #FFF;
@@ -35,7 +38,7 @@ p {
 }
 ul {
   padding: 0 10px;
-  background-color: #f0f0f0;
+  background-color: #f3e5f5;
 }
 .chip {
   margin-bottom: 10px;
@@ -47,6 +50,29 @@ ul {
 .hidden {
   display: none;
 }
-li.selected {
-  background-color: #e0e0e0;
+
+.tabs .tab a {
+  color: #9c27b0;
+}
+.tabs .tab a:hover{
+  color:#ba68c8;
+}
+.tabs .indicator {
+  background-color: #9c27b0;
+}
+.circle {
+  margin-top: 15px;
+}
+.play {
+  padding-left: 45%;
+  margin-top: -5px;
+  color: #fff;
+}
+.collapsible-header:hover + .play {
+  color: #e1bee7;
+}
+@media only screen and (max-width: 785px) {
+  .collapsible-body {
+    margin-left: -25%;;
+  }
 }
